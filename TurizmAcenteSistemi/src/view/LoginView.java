@@ -38,32 +38,34 @@ public class LoginView extends Layout {
         btn_login.addActionListener(e -> {
             JTextField[] checkFieldList = {this.fld_username, this.fld_password};
             if (Helper.isFieldListEmpty(checkFieldList)) {
+                // Boş alan kontrolü, tüm alanların doldurulması istenir
                 Helper.showMsg("fill");
             } else {
                 User loginUser = this.userManager.findByLogin(this.fld_username.getText(), this.fld_password.getText());
                 if (loginUser == null) {
+                    // Kullanıcı bulunamazsa hata mesajı gösterilir
                     Helper.showMsg("notFound");
                 } else {
                     // Kullanıcı Rol Kontrolü
                     switch (loginUser.getRole()){
                         case "admin":
                             AdminView adminView = new AdminView(loginUser);
-                            dispose();
+                            dispose();// Giriş ekranını kapatır
                             break;
                         case "employee":
                             EmployeeView employeeView = new EmployeeView(loginUser);
                             employeeView.setVisible(true);
-                            dispose();
+                            dispose();// Giriş ekranını kapatır
                             break;
                     }
-                    dispose();
+                    dispose();// Giriş ekranını kapatır
                 }
             }
         });
 
         //Çıkış butonuna basıldıgında yazacak buton
         btn_ext.addActionListener(e -> {
-            dispose();
+            dispose();// Giriş ekranını kapatır
         });
     }
 }

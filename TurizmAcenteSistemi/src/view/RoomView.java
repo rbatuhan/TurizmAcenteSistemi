@@ -8,6 +8,7 @@ import entity.*;
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -72,22 +73,27 @@ public class RoomView extends Layout {
         this.add(container);
         guiInitilaze(650, 650);
 
-
+        //Filtreleri yükleme
         loadHotelFilter();
         loadPansionFilter();
         loadSeasonFilter();
 
+        // Odayı kaydet butonuna tıklandığında gerçekleşecek olayları tanımlayan kod bloğu
         btn_room_save.addActionListener(e -> {
             if (Helper.isFieldListEmpty(new JTextField[]{this.fld_room_adult_prc, this.fld_room_child_prc, this.fld_room_stock,
                     this.fld_room_number_bed, this.fld_room_square_meter})) {
                 Helper.showMsg("fill");
             } else {
                 boolean result;
+                // Seçilen otel, pansiyon ve sezon bilgilerini alır
+                ComboItem selectHotel = (ComboItem) this.cmb_hotel.getSelectedItem();
+                int selectHotelID = selectHotel.getKey();
+                ComboItem selectPansion = (ComboItem) this.cmb_pansion.getSelectedItem();
+                int selectPansionID = selectPansion.getKey();
+                ComboItem selectSeason = (ComboItem) this.cmb_season.getSelectedItem();
+                int selectSeasonID = selectSeason.getKey();
 
-                String selectHotel = this.cmb_hotel.getSelectedItem().toString();
-                String selectHotelName = this.cmb_hotel.getSelectedItem().toString();
-                String selectPansion =  this.cmb_pansion.getSelectedItem().toString();
-                String selectSeason =  this.cmb_season.getSelectedItem().toString();
+                // Seçilen oda tipi, TV, minibar, oyun konsolu, kasa ve projeksiyon bilgilerini alır
                 String selectRoomType = this.cmb_room_type.getSelectedItem().toString();
                 String selectRoomTv = this.cmb_room_tv.getSelectedItem().toString();
                 String selectRoomMinibar = this.cmb_room_minibar.getSelectedItem().toString();
@@ -95,9 +101,10 @@ public class RoomView extends Layout {
                 String selectRoomKasa = this.cmb_room_kasa.getSelectedItem().toString();
                 String selectRoomProjection = this.cmb_room_projection.getSelectedItem().toString();
 
-                this.room.setHotel_id(Integer.parseInt(selectHotel));
-                this.room.setPansion_id(pansionType.getId());
-                this.room.setSeason_id(season.getId());
+                // Oda nesnesini günceller
+                this.room.setHotel_id(selectHotelID);
+                this.room.setPansion_id(selectPansionID);
+                this.room.setSeason_id(selectSeasonID);
                 this.room.setRoom_type(selectRoomType);
                 this.room.setRoom_stock(Integer.parseInt(fld_room_stock.getText()));
                 this.room.setRoom_adult_prc(Integer.parseInt(fld_room_adult_prc.getText()));
@@ -121,27 +128,28 @@ public class RoomView extends Layout {
         });
     }
 
+    //JComboBox içerisine oteli isimlerini ekleyen filtre
     public void loadHotelFilter() {
         this.cmb_hotel.removeAllItems();
         for (Hotel obj : hotelManager.findAll()) {
-            this.cmb_hotel.addItem(new ComboItem(obj.getId(), obj.getHotel_name()));
+            this.cmb_hotel.addItem(obj.getComboItemRoom());
         }
-
         this.cmb_hotel.setSelectedItem(null);
     }
 
+    //JComboBox içerisine pansiyon tiplerini ekleyen filtre
     public void loadPansionFilter() {
         this.cmb_pansion.removeAllItems();
         for (PansionType obj : pansionTypeManager.findAll()) {
-            this.cmb_pansion.addItem(new ComboItem(obj.getHotelId(), obj.getPansionType()));
+            this.cmb_pansion.addItem(obj.getComboItem());
         }
         this.cmb_pansion.setSelectedItem(null);
     }
-
+    //JComboBox içerisine sezonları ekleyen filtre
     public void loadSeasonFilter() {
         this.cmb_season.removeAllItems();
         for (Season obj : seasonManager.findAll()) {
-            this.cmb_season.addItem(new ComboItem(obj.getHotel_id(), obj.getStrt_date().toString() + " / " + obj.getFnsh_date().toString()));
+            this.cmb_season.addItem(obj.getComboItemSeason());
         }
         this.cmb_season.setSelectedItem(null);
     }

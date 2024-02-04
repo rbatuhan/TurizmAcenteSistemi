@@ -1,20 +1,15 @@
 package core;
 
 public class ComboItem {
-    private int key;
-    private String value;
+    private int key; // Verinin benzersiz kimliğini temsil eden anahtar
+    private String value; // Gösterilecek metni temsil eden değer
 
     public ComboItem(int key, String value) {
         this.key = key;
         this.value = value;
     }
 
-    public ComboItem(String value, int key) {
-        this.value = value;
-        this.key = key;
-    }
-
-
+    // Anahtarı getiren metot
     public int getKey() {
         return key;
     }
@@ -31,7 +26,8 @@ public class ComboItem {
         this.value = value;
     }
 
+
     public String toString() {
         return this.value;
-    }
+    } // Nesnenin değerini string olarak döndürür
 }

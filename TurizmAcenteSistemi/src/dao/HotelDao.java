@@ -13,6 +13,7 @@ public class HotelDao {
         this.conn = Db.getInstance();
     }
 
+    // Belirtilen ID'ye sahip oteli getiren metod
     public Hotel getById(int id) {
         Hotel obj = null;
         String query = "SELECT * FROM public.hotel WHERE hotel_id = ?";
@@ -27,6 +28,7 @@ public class HotelDao {
         return obj;
     }
 
+    // Otel ismine göre oteli getiren metod
     public ArrayList<String> getByName() {
         ArrayList<String> hotelList = new ArrayList<>();
         String query = "SELECT hotel_name FROM public.hotel ORDER BY hotel_name ASC";
@@ -43,10 +45,12 @@ public class HotelDao {
         return hotelList;
     }
 
+    // Bütün otelleri getiren metod
     public ArrayList<Hotel> findAll() {
         return this.selectByQuery("SELECT * FROM public.hotel ORDER BY hotel_id ASC");
     }
 
+    // Belirtilen query sorgusuna göre otelleri getiren metod
     public ArrayList<Hotel> selectByQuery(String query) {
         ArrayList<Hotel> hotelList = new ArrayList<>();
         try {
@@ -60,6 +64,7 @@ public class HotelDao {
         return hotelList;
     }
 
+    // ResultSet'ten dönen satırı otel nesnesine eşleştiren metod
     public Hotel match(ResultSet rs) throws Exception {
         Hotel obj = new Hotel();
         obj.setId(rs.getInt("hotel_id"));
@@ -81,6 +86,7 @@ public class HotelDao {
         return obj;
     }
 
+    // Yeni bir otel kaydı ekleyen metod
     public boolean save(Hotel hotel) {
         String query = "INSERT INTO public.hotel " +
                 "(" +

@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Layout extends JFrame {
+    // GUI'nin başlatılması için kullanılan metod
     public void guiInitilaze(int witdh, int height) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Patika Turizm Acentesi");
@@ -17,6 +18,7 @@ public class Layout extends JFrame {
         this.setVisible(true);
     }
 
+    // JTable oluşturmak ve güncellemek için kullanılan metod
     public void createTable(DefaultTableModel model, JTable table, Object[] columns, ArrayList<Object[]> rows) {
         model.setColumnIdentifiers(columns);
         table.setModel(model);
@@ -36,10 +38,12 @@ public class Layout extends JFrame {
         }
     }
 
+    // Seçilen satırın belirtilen indeksteki değerini getiren metod
     public int getTableSelectedRow(JTable table, int index){
         return Integer.parseInt(table.getValueAt(table.getSelectedRow(), index).toString());
     }
 
+    // JTable'da satır seçme işlevini gerçekleştiren metod
     public void tableRowSelect(JTable table) {
         table.addMouseListener(new MouseAdapter() {
             @Override

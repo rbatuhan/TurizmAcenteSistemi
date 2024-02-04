@@ -50,6 +50,6 @@ public class PansionType {
     }
 
     public ComboItem getComboItem(){
-        return new ComboItem(this.getId(), this.getPansionType() +" - "+ this.getHotelId());
+        return new ComboItem(this.getId(), this.getPansionType());
     }
 }

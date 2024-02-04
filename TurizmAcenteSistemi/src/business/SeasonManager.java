@@ -11,12 +11,15 @@ import java.util.ArrayList;
 public class SeasonManager {
     private final SeasonDao seasonDao;
 
+    // ID'ye göre sezon getiren metot.
     public Season getById(int id){
         return this.seasonDao.getById(id);
     }
 
+    // Tüm sezonları getiren metot.
     public ArrayList<Season> findAll() {return this.seasonDao.findAll();}
 
+    // Tablo için sezon bilgilerini düzenleyen metot.
     public ArrayList<Object[]> getForTable(int size, ArrayList<Season> seasonList) {
         ArrayList<Object[]> seasonObjList = new ArrayList<>();
         for (Season obj : seasonList) {
@@ -35,6 +38,7 @@ public class SeasonManager {
         this.seasonDao = new SeasonDao();
     }
 
+    // Yeni bir sezon ekleyen metot.
     public boolean save(Season season){
         if (this.getById(season.getId()) != null){
             Helper.showMsg("error");

@@ -16,10 +16,12 @@ public class SeasonDao {
         this.hotelDao = new HotelDao();
     }
 
+    // Tüm sezonları getiren metot.
     public ArrayList<Season> findAll(){
         return this.selectByQuery("SELECT * FROM public.season ORDER BY season_id ASC");
     }
 
+    // Verilen query sorgusuna göre sezonları getiren genel metot
     public ArrayList<Season> selectByQuery(String query){
         ArrayList<Season> seasons = new ArrayList<>();
         try {
@@ -33,6 +35,7 @@ public class SeasonDao {
         return seasons;
     }
 
+    // Yeni bir sezon ekleyen metot.
     public boolean save(Season season){
         String query = "INSERT INTO public.season" +
                 "(" +
@@ -55,6 +58,7 @@ public class SeasonDao {
         return true;
     }
 
+    // ResultSet'ten alınan verilerle bir sezon nesnesi oluşturan metot.
     public Season match(ResultSet rs) throws SQLException {
         Season season = new Season();
         season.setId(rs.getInt("season_id"));
@@ -65,6 +69,7 @@ public class SeasonDao {
         return season;
     }
 
+    // ID'ye göre sezon getiren metot.
     public Season getById(int id){
         Season obj = null;
         String query = "SELECT * FROM public.season WHERE season_id = ?";

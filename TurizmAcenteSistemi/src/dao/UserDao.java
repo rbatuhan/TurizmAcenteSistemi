@@ -7,12 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UserDao {
-    private final Connection conn;
+    private final Connection conn; // Veritabanı bağlantısı
+
 
     public UserDao() {
-        this.conn = Db.getInstance();
+        this.conn = Db.getInstance(); // Veritabanı bağlantısını çalıştıran constructur
     }
 
+    //Kullanıcı ID'sine göre kullanıcı bilgisini getiren metot.
     public User getById(int id) {
         User obj = null;
         String query = "SELECT * FROM public.user WHERE user_id = ?";
@@ -29,12 +31,14 @@ public class UserDao {
         return obj;
     }
 
+    // Tüm kullanıcıları getiren metot.
     public ArrayList<User> findAll(){
         ArrayList<User> userList = new ArrayList<>();
         return this.selectByQuery("SELECT * FROM public.user ORDER BY user_id ASC");
 
     }
 
+    // Belirli bir roldeki kullanıcıları getiren metot.
     public ArrayList<User> findByRole(String userSearchRole){
         ArrayList<User> userList = new ArrayList<>();
         String query = "SELECT * FROM public.user WHERE user_role=" + "'"+userSearchRole+"'";
@@ -50,7 +54,7 @@ public class UserDao {
         }
         return userList;
     }
-
+    // Verilen query sorgusuna göre kullanıcıları getiren genel metot.
     public ArrayList<User> selectByQuery(String query){
         ArrayList<User> userList = new ArrayList<>();
         try {
@@ -64,6 +68,7 @@ public class UserDao {
         return userList;
     }
 
+    // Kullanıcı adı ve şifre ile giriş yapan kullanıcıyı getiren metot.
     public User findByLogin(String username, String password){
         User obj = null;
         String query = "SELECT * FROM public.user WHERE user_name = ? AND user_password = ?";
@@ -81,9 +86,7 @@ public class UserDao {
         return obj;
     }
 
-
-
-
+    // Yeni bir kullanıcı ekleyen metot.
     public boolean save(User user) {
         String query = "INSERT INTO public.user " +
                 "(" +
@@ -106,6 +109,7 @@ public class UserDao {
         return true;
     }
 
+    // Kullanıcı bilgilerini güncelleyen metot.
     public boolean update(User user){
         String query = "UPDATE public.user SET " +
                 "user_name = ?, " +
@@ -125,6 +129,7 @@ public class UserDao {
         return true;
     }
 
+    //Seçili ID'ye sahip kullanıcıyı silen metot.
     public boolean delete(int id){
         String query = "DELETE FROM public.user WHERE user_id = ?";
         try {
@@ -137,6 +142,7 @@ public class UserDao {
         return true;
     }
 
+    // ResultSet'ten alınan verilerle bir kullanıcı nesnesi oluşturan metot.
     public  User match(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("user_id"));

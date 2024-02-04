@@ -32,17 +32,23 @@ public class PansionTypeView extends Layout {
         this.add(container);
         guiInitilaze(300, 300);
 
-
+        // Otel ID'sini yazar
         lbl_hotel_id.setText("Otel ID : " + hotelId);
 
+        // Pansiyon türü kaydet butonuna tıklandığında gerçekleşecek olayları tanımlayan kod bloğu
         btn_pansion_type_save.addActionListener(e -> {
             boolean result = true;
+            // Seçilen pansiyon türünü alır
             String selectPansionType = this.cmb_pansion_type.getSelectedItem().toString();
 
+            // PansionType nesnesini günceller
             this.pansionType.setPansionType(selectPansionType);
             this.pansionType.setHotelId(Integer.parseInt(String.valueOf(this.hotelId)));
 
+            // Pansion türünü kaydeder
             this.pansionTypeManager.save(this.pansionType);
+
+            //Sonuca göre bilgi mesajı gösterir
             if (result) {
                 Helper.showMsg("done");
                 dispose();

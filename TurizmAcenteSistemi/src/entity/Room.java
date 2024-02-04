@@ -18,6 +18,8 @@ public class Room {
     private String room_game_console;
     private String room_kasa;
     private String room_projection;
+    private Hotel hotel;
+    private PansionType pansionType;
 
     public Room(int id, String room_type, int room_stock, int season_id, int room_adult_prc, int room_child_prc,
                 int hotel_id, int pansion_id, int room_square_meter, int room_number_bed, String room_tv,
@@ -37,6 +39,22 @@ public class Room {
         this.room_game_console = room_game_console;
         this.room_kasa = room_kasa;
         this.room_projection = room_projection;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public PansionType getPansionType() {
+        return pansionType;
+    }
+
+    public void setPansionType(PansionType pansionType) {
+        this.pansionType = pansionType;
     }
 
     public Room(){
@@ -190,4 +208,5 @@ public class Room {
                 this.getRoom_square_meter() +" - "+ this.getRoom_tv() +" - "+ this.getRoom_minibar() +" - "+
                 this.getRoom_game_console() +" - "+ this.getRoom_kasa() +" - "+ this.getRoom_projection());
     }
+
 }

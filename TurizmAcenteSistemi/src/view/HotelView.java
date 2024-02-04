@@ -60,6 +60,7 @@ public class HotelView extends Layout {
         this.add(container);
         guiInitilaze(600, 500);
 
+        // Otel bilgileri varsa, alanları doldur
         if (this.hotel.getId() != 0){
             ComboItem selectItem = hotel.getComboItem();
             this.cmb_hotel_star.getModel().setSelectedItem(selectItem);
@@ -72,12 +73,15 @@ public class HotelView extends Layout {
 
         }
 
+        // Kaydet butonuna basıldığında çalışacak metot
         btn_hotel_save.addActionListener(e -> {
             if (Helper.isFieldListEmpty(new JTextField[]{fld_hotel_name, fld_hotel_city, fld_hotel_region, fld_hotel_address,
                     fld_hotel_mail, fld_hotel_mpno})) {
                 Helper.showMsg("fill");
             } else {
                 boolean result;
+
+                // Seçilen özelliklerin değerleri
                 String selectedStar = this.cmb_hotel_star.getSelectedItem().toString();
                 String selectedCarPark = this.cmb_hotel_features_carpark.getSelectedItem().toString();
                 String selectedWifi = this.cmb_hotel_features_wifi.getSelectedItem().toString();
@@ -87,7 +91,7 @@ public class HotelView extends Layout {
                 String selectedSpa = this.cmb_hotel_features_spa.getSelectedItem().toString();
                 String selectedRoomService = this.cmb_hotel_features_room_service.getSelectedItem().toString();
 
-
+                // Otel nesnesinin değerlerini set et
                 this.hotel.setHotel_name(this.fld_hotel_name.getText());
                 this.hotel.setHotel_star(selectedStar);
                 this.hotel.setHotel_city(this.fld_hotel_city.getText());
@@ -103,6 +107,7 @@ public class HotelView extends Layout {
                 this.hotel.setHotel_features_spa(selectedSpa);
                 this.hotel.setHotel_features_room_service(selectedRoomService);
 
+                // Otel bilgilerini veritabanına kaydet
                 result = hotelManager.save(this.hotel);
                 if (result){
                     Helper.showMsg("done");
@@ -113,6 +118,4 @@ public class HotelView extends Layout {
             }
         });
     }
-
-
 }

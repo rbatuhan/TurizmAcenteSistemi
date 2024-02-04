@@ -36,17 +36,19 @@ public class AdminView extends Layout {
         this.add(container);
         guiInitilaze(1000, 600);
 
+        // Eğer kullanıcı bilgisi null ise paneli kapat
         if (this.user == null) {
             dispose();
         }
         this.lbl_welcome.setText("Admin Paneline Hoşgeldin :  " + user.getUsername());
 
+        // Kullanıcı tablosunu yükle ve bileşenleri başlat
         loadUserTable(null);
         loadUserComponent();
 
     }
 
-
+    // Kullanıcı tablosunu yükleyen metot
     public void loadUserTable(ArrayList<Object[]> userList) {
         this.col_admin = new Object[]{"ID", "Kullanıcı Adı", "Şifre", "Rol"};
         if (userList == null) {
@@ -55,9 +57,12 @@ public class AdminView extends Layout {
         createTable(this.tmdl_admin, this.tbl_admin, col_admin, userList);
     }
 
+    // Kullanıcı bileşenlerini yükleyen metot
     private void loadUserComponent() {
         tableRowSelect(this.tbl_admin);
         this.user_menu = new JPopupMenu();
+
+        // Yeni kullanıcı ekranını açan menü öğesi
         this.user_menu.add("Yeni").addActionListener(e -> {
             UserView userView = new UserView(new User());
             userView.addWindowListener(new WindowAdapter() {
@@ -67,7 +72,7 @@ public class AdminView extends Layout {
                 }
             });
         });
-
+        // Kullanıcı güncelleme ekranını açan menü öğesi
         this.user_menu.add("Güncelle").addActionListener(e -> {
             int selectedUserId = this.getTableSelectedRow(tbl_admin, 0);
             UserView userView = new UserView(this.userManager.getById(selectedUserId));
@@ -78,7 +83,7 @@ public class AdminView extends Layout {
                 }
             });
         });
-
+        // Kullanıcı silme işlemini gerçekleştiren menü öğesi
         this.user_menu.add("Sil").addActionListener(e -> {
             if (Helper.confirm("sure")) {
                 int selectUserID = this.getTableSelectedRow(tbl_admin, 0);

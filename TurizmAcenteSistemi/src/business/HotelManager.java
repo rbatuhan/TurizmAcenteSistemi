@@ -10,16 +10,13 @@ public class HotelManager {
 
     private final HotelDao hotelDao;
 
+    // Belirtilen ID'ye sahip oteli getiren metod
     public Hotel getByID(int id){return this.hotelDao.getById(id);}
-    public ArrayList<String> getByName(){
-        return  this.hotelDao.getByName();
-    }
 
-
-
-
+    // Bütün otelleri getiren metod
     public ArrayList<Hotel> findAll() {return this.hotelDao.findAll();}
 
+    // Otelleri tabloya uygun formatta getiren metod
     public ArrayList<Object[]> getForTable(int size, ArrayList<Hotel> hotelList){
         ArrayList<Object[]> hotelObjList = new ArrayList<>();
         for (Hotel obj : hotelList){
@@ -49,6 +46,7 @@ public class HotelManager {
         this.hotelDao = new HotelDao();
     }
 
+    // Yeni bir otel kaydı ekleyen metod
     public boolean save(Hotel hotel){
         if (this.getByID(hotel.getId()) != null){
             Helper.showMsg("error");

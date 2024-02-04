@@ -36,20 +36,23 @@ public class SeasonView extends Layout {
         this.add(container);
         guiInitilaze(400,400);
 
+        // Otel ID'sini yazar
         lbl_hotel_id.setText("Otel ID : " + hotelId);
 
+        // Sezonu kaydet butonuna tıklandığında gerçekleşecek olayları tanımlayan kod bloğu
         btn_season_save.addActionListener(e -> {
             if (Helper.isFieldListEmpty(new JTextField[]{fld_strt_date, fld_fnsh_date})){
                 Helper.showMsg("fill");
             }else {
                 boolean result = true;
 
+                // Sezon nesnesinin başlangıç ve bitiş tarihlerini ve otel ID'sini günceller
                 this.season.setStrt_date(LocalDate.parse( fld_strt_date.getText(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
                 this.season.setFnsh_date(LocalDate.parse( fld_fnsh_date.getText(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
                 this.season.setHotel_id(Integer.parseInt(String.valueOf(this.hotelId)));
 
             }
-
+            // Sezonu kaydedip sonucu değerlendirir
             if (this.seasonManager.save(season)){
                 Helper.showMsg("done");
                 dispose();
@@ -61,6 +64,7 @@ public class SeasonView extends Layout {
         });
     }
     private void createUIComponents() throws ParseException {
+        // Maske biçimine sahip başlangıç tarih ve bitiş tarih alanını oluşturur ve varsayılan bir tarihle doldurur
         this.fld_strt_date = new JFormattedTextField(new MaskFormatter("####/##/##"));
         this.fld_strt_date.setText("2024/01/01");
         this.fld_fnsh_date = new JFormattedTextField(new MaskFormatter("####/##/##"));

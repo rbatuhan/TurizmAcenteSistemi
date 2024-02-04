@@ -1,6 +1,7 @@
 package dao;
 
 import core.Db;
+import entity.PansionType;
 import entity.Room;
 
 import java.sql.Connection;
@@ -11,11 +12,17 @@ import java.util.ArrayList;
 
 public class RoomDao {
     private final Connection conn;
+    private HotelDao hotelDao;
+    private PansionTypeDao pansionTypeDao;
+
 
     public RoomDao() {
         this.conn = Db.getInstance();
+        this.hotelDao = new HotelDao();
+        this.pansionTypeDao = new PansionTypeDao();
     }
 
+    // ID'ye göre oda getiren metot.
     public Room getById(int id) {
         Room obj = null;
         String query = "SELECT * FROM public.room WHERE room_id = ?";
@@ -32,10 +39,11 @@ public class RoomDao {
         return obj;
     }
 
+    // Tüm odaları getiren metot.
     public ArrayList<Room> findAll() {
         return this.selectByQuery("SELECT * FROM public.room ORDER BY room_id ASC");
     }
-
+    // Belirli bir query sorgusuna göre odaları getiren genel metot.
     public ArrayList<Room> selectByQuery(String query) {
         ArrayList<Room> roomList = new ArrayList<>();
         try {
@@ -43,14 +51,13 @@ public class RoomDao {
             while (rs.next()) {
                 roomList.add(this.match(rs));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
         return roomList;
     }
 
+    // ResultSet'ten alınan verilerle bir oda nesnesi oluşturan metot.
     public Room match(ResultSet rs) throws Exception {
         Room obj = new Room();
         obj.setId(rs.getInt("room_id"));
@@ -59,8 +66,8 @@ public class RoomDao {
         obj.setSeason_id(rs.getInt("season_id"));
         obj.setRoom_adult_prc(rs.getInt("room_adult_prc"));
         obj.setRoom_child_prc(rs.getInt("room_child_prc"));
-        obj.setId(rs.getInt("hotel_id"));
-        obj.setId(rs.getInt("pansion_id"));
+        obj.setHotel_id(rs.getInt("hotel_id"));
+        obj.setPansion_id(rs.getInt("pansion_id"));
         obj.setRoom_square_meter(rs.getInt("room_square_meter"));
         obj.setRoom_number_bed(rs.getInt("room_number_bed"));
         obj.setRoom_tv(rs.getString("room_tv"));
@@ -68,9 +75,11 @@ public class RoomDao {
         obj.setRoom_game_console(rs.getString("room_game_console"));
         obj.setRoom_kasa(rs.getString("room_kasa"));
         obj.setRoom_projection(rs.getString("room_projection"));
+        obj.setHotel(this.hotelDao.getById(rs.getInt("hotel_id")));
+        obj.setPansionType(this.pansionTypeDao.getById(rs.getInt("pansion_id")));
         return obj;
     }
-
+    // Yeni bir oda ekleyen metot.
     public boolean save(Room room) {
         String query = "INSERT INTO public.room" +
                 "(" +

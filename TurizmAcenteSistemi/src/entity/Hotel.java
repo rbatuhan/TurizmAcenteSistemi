@@ -192,6 +192,10 @@ public class Hotel {
                 this.hotel_features_spa +" - "+ this.hotel_features_room_service);
     }
 
+    public ComboItem getComboItemRoom(){
+        return new ComboItem(this.getId(), this.getHotel_name());
+    }
+
 }
 
 
