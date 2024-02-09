@@ -59,8 +59,7 @@ public class Season {
                 ", hotel_id=" + hotel_id +
                 "}";
     }
-
     public ComboItem getComboItemSeason(){
-        return new ComboItem(this.getId(), this.getStrt_date().toString());
+        return new ComboItem(this.getId(), this.getStrt_date().toString() + " *  * " + this.getFnsh_date().toString());
     }
 }

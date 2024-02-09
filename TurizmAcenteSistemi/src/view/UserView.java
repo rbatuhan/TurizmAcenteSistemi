@@ -58,6 +58,7 @@ public class UserView extends Layout {
                 } else {
                     result = this.userManager.save(this.user);
                 }
+
                 // Sonuca göre bilgi mesajı verir
                 if (result) {
                     Helper.showMsg("done");

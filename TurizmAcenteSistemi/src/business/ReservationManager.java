@@ -2,13 +2,15 @@ package business;
 
 import core.Helper;
 import dao.ReservationDao;
-import dao.UserDao;
+import dao.RoomDao;
 import entity.Reservation;
-import entity.User;
+import entity.Room;
 
 import java.util.ArrayList;
 
 public class ReservationManager {
+    private  RoomDao roomDao;
+
     private final ReservationDao reservationDao;
 
     // ID'ye göre rezervasyon getiren metot.
@@ -70,5 +72,18 @@ public class ReservationManager {
             return false;
         }
         return this.reservationDao.delete(id);
+    }
+
+    // Oda stoğunu güncelleyen metot.
+    public void updateStock(Room room){
+        roomDao = new RoomDao();
+        // Eğer oda mevcut değilse hata mesajı gösterir ve işlemi sonlandırır.
+        if (this.getById(room.getId()) != null){
+            Helper.showMsg(room.getRoom_stock() + "ID kayıtlı oda bulunamadı");
+            return;
+        } else {
+            // Aksi halde oda stoğunu günceller.
+            this.roomDao.updateStock(room);
+        }
     }
 }

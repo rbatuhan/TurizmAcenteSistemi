@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.ReservationView">
   <grid id="27dc6" binding="container" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+    <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="898" height="771"/>
+      <xy x="20" y="20" width="898" height="791"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -286,16 +286,6 @@
               <text value="Giriş Tarihi"/>
             </properties>
           </component>
-          <component id="36469" class="javax.swing.JTextField" binding="fld_rsv_strt_date">
-            <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <editable value="true"/>
-            </properties>
-          </component>
           <component id="92005" class="javax.swing.JLabel" binding="lbl_rsv_fnsh_date">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -303,14 +293,6 @@
             <properties>
               <text value="Çıkış Tarihi"/>
             </properties>
-          </component>
-          <component id="7567b" class="javax.swing.JTextField" binding="fld_rsv_fnsh_date">
-            <constraints>
-              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
           </component>
           <component id="ae203" class="javax.swing.JLabel" binding="lbl_rsv_total_prc">
             <constraints>
@@ -328,6 +310,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <enabled value="true"/>
             </properties>
           </component>
           <component id="69829" class="javax.swing.JLabel" binding="lbl_rsv_room_tv">
@@ -446,6 +429,26 @@
               <editable value="false"/>
             </properties>
           </component>
+          <component id="49982" class="javax.swing.JTextField" binding="fld_rsv_strt_date" custom-create="true">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+            </properties>
+          </component>
+          <component id="ce6a3" class="javax.swing.JTextField" binding="fld_rsv_fnsh_date" custom-create="true">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="c8ee3" binding="pnl_rsv_reservation" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -476,14 +479,6 @@
             <properties>
               <text value="Toplam Misafir Sayısı"/>
             </properties>
-          </component>
-          <component id="fb05b" class="javax.swing.JTextField" binding="fld_rsv_total_customer">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
           </component>
           <component id="1d639" class="javax.swing.JLabel" binding="lbl_rsv_customer_name">
             <constraints>
@@ -555,6 +550,16 @@
             </constraints>
             <properties>
               <text value="Rezervasyon Oluştur"/>
+            </properties>
+          </component>
+          <component id="261f2" class="javax.swing.JTextField" binding="fld_rsv_total_customer">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
             </properties>
           </component>
         </children>

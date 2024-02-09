@@ -60,7 +60,7 @@ public class ReservationDao {
         Reservation obj = new Reservation();
         obj.setId(rs.getInt("rsv_id"));
         obj.setRoom_id(rs.getInt("room_id"));
-        obj.setStrt_date(LocalDate.parse(rs.getString("rsv_start_date")));
+        obj.setStrt_date(LocalDate.parse(rs.getString("rsv_strt_date")));
         obj.setFnsh_date(LocalDate.parse(rs.getString("rsv_fnsh_date")));
         obj.setTotalPrc(rs.getInt("rsv_price"));
         obj.setTotalPeople(rs.getInt("rsv_total_customer"));
@@ -70,6 +70,7 @@ public class ReservationDao {
         obj.setCustomerSsn(rs.getInt("rsv_customer_ssn"));
         return obj;
     }
+
     // Yeni bir rezervasyon ekleyen metot
     public boolean save(Reservation reservation) {
         String query = "INSERT INTO public.reservation " +
@@ -82,7 +83,7 @@ public class ReservationDao {
                 "room_id," +
                 "rsv_price," +
                 "rsv_total_customer," +
-                "rsv_customer_ssn," +
+                "rsv_customer_ssn" +
                 ")" +
                 " VALUES (?,?,?,?,?,?,?,?,?)";
         try {
@@ -90,6 +91,7 @@ public class ReservationDao {
             pr.setString(1, reservation.getCustomerName());
             pr.setInt(2, reservation.getCustomerMpno());
             pr.setString(3, reservation.getCustomerMail());
+
             pr.setDate(4, Date.valueOf(reservation.getStrt_date()));
             pr.setDate(5, Date.valueOf(reservation.getFnsh_date()));
             pr.setInt(6, reservation.getRoom_id());

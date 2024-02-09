@@ -75,8 +75,25 @@ public class RoomView extends Layout {
 
         //Filtreleri yükleme
         loadHotelFilter();
-        loadPansionFilter();
-        loadSeasonFilter();
+
+        // Otel değiştirildiğinde pansion ve sezon filtrelerini günceller
+        this.cmb_hotel.addActionListener(e -> {
+            this.cmb_pansion.removeAllItems();
+            this.cmb_season.removeAllItems();
+
+            int selectedHotelId = ((ComboItem) this.cmb_hotel.getSelectedItem()).getKey();
+
+            for (Season season : this.seasonManager.findAll()) {
+                if(season.getHotel_id() == selectedHotelId){
+                    this.cmb_season.addItem(season.getComboItemSeason());
+                }
+            }
+            for (PansionType pansion : this.pansionTypeManager.findAll()) {
+                if(pansion.getHotelId() == selectedHotelId){
+                    this.cmb_pansion.addItem(pansion.getComboItem());
+                }
+            }
+        });
 
         // Odayı kaydet butonuna tıklandığında gerçekleşecek olayları tanımlayan kod bloğu
         btn_room_save.addActionListener(e -> {
@@ -135,22 +152,5 @@ public class RoomView extends Layout {
             this.cmb_hotel.addItem(obj.getComboItemRoom());
         }
         this.cmb_hotel.setSelectedItem(null);
-    }
-
-    //JComboBox içerisine pansiyon tiplerini ekleyen filtre
-    public void loadPansionFilter() {
-        this.cmb_pansion.removeAllItems();
-        for (PansionType obj : pansionTypeManager.findAll()) {
-            this.cmb_pansion.addItem(obj.getComboItem());
-        }
-        this.cmb_pansion.setSelectedItem(null);
-    }
-    //JComboBox içerisine sezonları ekleyen filtre
-    public void loadSeasonFilter() {
-        this.cmb_season.removeAllItems();
-        for (Season obj : seasonManager.findAll()) {
-            this.cmb_season.addItem(obj.getComboItemSeason());
-        }
-        this.cmb_season.setSelectedItem(null);
     }
 }

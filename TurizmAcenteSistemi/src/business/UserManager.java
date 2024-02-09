@@ -73,5 +73,4 @@ public class UserManager {
         }
         return this.userDao.delete(id);
     }
-
 }

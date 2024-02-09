@@ -122,4 +122,33 @@ public class RoomDao {
         }
         return true;
     }
+
+    // Oda silen metot.
+    public boolean delete(int id){
+        String query = "DELETE FROM public.room WHERE room_id = ?";
+        try {
+            PreparedStatement pr = this.conn.prepareStatement(query);
+            pr.setInt(1, id);
+            return pr.executeUpdate() != -1;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return true;
+    }
+
+    // Oda stoğunu güncelleyen metot.
+    public boolean updateStock(Room room) {
+        String query = "UPDATE public.room SET " +
+                "room_stock = ? " +
+                "WHERE room_id = ? ";
+        try {
+            PreparedStatement pr = this.conn.prepareStatement(query);
+            pr.setInt(1, room.getRoom_stock());
+            pr.setInt(2, room.getId());
+            return pr.executeUpdate() != -1;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return true;
+    }
 }

@@ -1,9 +1,7 @@
 package business;
 
 import core.Helper;
-import dao.PansionTypeDao;
 import dao.SeasonDao;
-import entity.PansionType;
 import entity.Season;
 
 import java.util.ArrayList;
@@ -15,6 +13,8 @@ public class SeasonManager {
     public Season getById(int id){
         return this.seasonDao.getById(id);
     }
+
+    public ArrayList<Season> findHotelSeason(int hotelID) {return this.seasonDao.findHotelSeason(hotelID);}
 
     // Tüm sezonları getiren metot.
     public ArrayList<Season> findAll() {return this.seasonDao.findAll();}

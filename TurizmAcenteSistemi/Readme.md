@@ -43,11 +43,6 @@ Employee paneline yönlendirilirsiniz.
 Giriş yaptıktan sonra ilgili butonları kullanarak veya tablo üzerine sağ tık ile 
 seçeceğiniz seçimler ile işlemlerinizi yapabilirsiniz.
 
-NOT = Ödev malesef yetiştirilememiştir :( 
-Ödevde rezervasyon ekranı oluşturulmuş olup ekleme,silme,güncelleme yapılamamıştır.
-
-
-
 Proje İsterleri;
 1. Değişkenler ve fonksiyon isimleri olabildiğince anlaşılır yapılmıştır.
 2. Projede yorum satırları ve Readme dosyası mevcuttur.
@@ -56,7 +51,7 @@ Proje İsterleri;
 5. Projede Swing GUI kullanılmıştır.
 6. Projede PostgreSql veritabanı kullanılmış olup Db bağlantısı yapılmıştır.
 7. Admin paneleri içerisinde ekleme,güncelleme, silme, filtreleme yapılabilekmektedir.
-8. x =>Rezervasyon kısmı eksik
+8. Personel proje kapsamındaki otel, oda , rezervasyon ekleme listeleme gibi özellikleri yapabilir şekilde kullanılmıştır.
 9. Login işleminde kullanı kaydı kontrol ediliyor.
 10. Personel sisteme personel panelinin Otel yöntimi kısmından Otel kaydedebiliyor
 11. Otelleri sisteme ekledikten sonra üzerine sağ tık yapıp dönem eklenebiliyor.
@@ -64,16 +59,24 @@ Proje İsterleri;
 13. Personel sisteme personel panelinin Oda Yöntimi kısmından Oda kaydedebiliyor.
 14. Yeni eklenen odalara yetişkin-çocuk fiyatlandırması yapılabiliyor.
 15. Personel odaları filtreleri kullanarak filtreleyebiliyor.
-16. x => Ufak bir SQL hatası var zaman kalmadığı için düzeltemeden atıyorum.
-17. x => Rezervasyon paneli yapıldı ama kodlamaları yapılmadı (fiyat hesaplama)
-18. x => Rezervasyon ekleme eklenemedi
-19. x => Rezervasyon işlemleri yapılamadı (Oda stoğu azalması)
-20. x => Rezervasyon ekleme işlemi yapılmadığından listelenecek veri yok
-21. x => Rezervasyon güncelleme eklenemedi
-22. x => Rezervasyon silme eklenemedi
-23. x => Rezervasyon işlemleri yapılamadı (Oda stoğu artması)
+16. Personel filtre sonrası uygun bilgileri görebilmektedir.
+//EmployeeView => 274. Satır
+17. Girilen verilere göre toplam ücret hesaplanıp kullanıcıya gösteriliyor.
+//ReservationView => 137. Satır
+18. Personel gerekli verileri girerek rezervasyon yapabiliyor
+// EmployeeView => 318. Satır
+19. Rezervasyon işlemi sonrası oda stoğu 1 azalmaktadır.
+// ReservationView =>  176. Satır
+20. Rezervasyonlar 'Rezervasyon' tablosunda listelenmektedir.
+// EmployeView => 124. Satır
+21. Rezervasyon tablosunda sağ tık ile güncelle diyerek rezervasyonlar güncellenebilmektedir.
+// EmployeeView => 230. Satır
+22. Rezervasyon tablosunda sağ tık ile rezervasyonları silmek mümkün.
+// EmployeeView => 252. Satır
+23. Rezervasyon silme işlemi sonrası ilgili oda stoğu 1 artmaktadır.
+// Employeeview => 258. Satır
 24. Kullanıcıya başarılı işlemleri sonrası pop up mesajları çıkmaktadır.
 25. Kullanıcıya hatalı işlemleri sonrası pop up mesajları çıkmaktadır.
 
 Video
-https://www.youtube.com/watch?v=LWWDsXSEG0E
+https://www.youtube.com/watch?v=t_LXdaU_xKg

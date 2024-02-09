@@ -25,8 +25,6 @@ public class SeasonView extends Layout {
     private SeasonManager seasonManager;
     private int hotelId;
 
-
-
     public SeasonView (int hotelId ){
         this.season = new Season();
         this.seasonManager = new SeasonManager();
@@ -59,12 +57,11 @@ public class SeasonView extends Layout {
             } else {
                 Helper.showMsg("error");
             }
-
-
         });
     }
+
+    // Başlangıç tarih ve bitiş tarih alanlarını oluşturan ve varsayılan bir tarihle dolduran metod
     private void createUIComponents() throws ParseException {
-        // Maske biçimine sahip başlangıç tarih ve bitiş tarih alanını oluşturur ve varsayılan bir tarihle doldurur
         this.fld_strt_date = new JFormattedTextField(new MaskFormatter("####/##/##"));
         this.fld_strt_date.setText("2024/01/01");
         this.fld_fnsh_date = new JFormattedTextField(new MaskFormatter("####/##/##"));

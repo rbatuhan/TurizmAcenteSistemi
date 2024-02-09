@@ -6,6 +6,7 @@ import entity.Hotel;
 import entity.Room;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,40 +63,40 @@ public class RoomManager {
         return this.roomDao.save(room);
     }
 
+    // Oda silen metot.
+    public boolean delete(int id){
+        if (this.getByID(id) == null){
+            Helper.showMsg(id + " ID kayıtlı kullanıcı bulunamadı");
+            return false;
+        }
+        return this.roomDao.delete(id);
+    }
+
     // Tabloda oda arama işlemini gerçekleştiren metot.
-    public ArrayList<Room> searchForTable(String hotel_name, String hotel_city, String strt_date, String fnsh_date,
-                                          int adult_count, int child_count) {
+    public ArrayList<Room> searchForTable(String hotel_name, String hotel_city, String strt_date,
+                                          String fnsh_date, int adultCount, int childCount) {
+        ArrayList<String> searchRoomQuery = new ArrayList<>();
+        String query = "SELECT * FROM public.room r " +
+                "JOIN public.hotel AS h ON r.hotel_id = h.hotel_id " +
+                "LEFT JOIN season s ON r.season_id = s.season_id WHERE ";
 
-        ArrayList<String> querys = new ArrayList<>();
-        ArrayList<Room> result = new ArrayList<>();
-
-        if (hotel_name.isBlank()) {
-            querys.add(" SELECT * FROM public.room r  LEFT JOIN public.hotel h ON r.hotel_id = h.hotel_id" +
-                    " WHERE h.hotel_name ILIKE '%" + hotel_name + "%'");
+        searchRoomQuery.add(" r.room_stock > " + 0);
+        searchRoomQuery.add(" AND r.room_number_bed >= " + (adultCount + childCount));
+        if (!strt_date.equals("    /  /  ")){
+            searchRoomQuery.add(" AND s.season_strt_date <= '" + strt_date + "'");
         }
-        if (hotel_city.isBlank()) {
-            querys.add(" SELECT * FROM public.room r  LEFT JOIN public.hotel h ON r.hotel_id = h.hotel_id" +
-                    " WHERE h.hotel_city ILIKE '%" + hotel_city + "%'");
+        if (!fnsh_date.equals("    /  /  ")){
+            searchRoomQuery.add(" AND s.season_fnsh_date >= '" + fnsh_date + "'");
         }
-        //if (strt_date.isBlank()) {
-        //    querys.add(" SELECT * FROM public.room r  LEFT JOIN public.season s ON r.season_id = s.season_id" +
-        //            " WHERE AND s.season.strt_date >= '" + strt_date);
-       // }
-       // if (fnsh_date.isBlank()) {
-       //     querys.add(" SELECT * FROM public.room r  LEFT JOIN public.season s ON r.season_id = s.season_id " +
-        //            " WHERE s.season.fnsh_date <= '" + strt_date);
-        //}
-        //if (adult_count >= 0) {
-        //    querys.add(" ");
-       // }
-       // if (child_count >= 0) {
-        //    querys.add(" ");
-       // }
-
-        for (String s : querys) {
-            result.addAll(roomDao.selectByQuery(s));
+        if (hotel_name != null) {
+            searchRoomQuery.add(" AND LOWER(h.hotel_name) LIKE LOWER('%" + hotel_name + "%')");
+        }
+        if (hotel_city != null) {
+            searchRoomQuery.add(" AND LOWER(h.hotel_city) LIKE LOWER('%" + hotel_city + "%')");
         }
 
-        return result;
+        query += String.join("", searchRoomQuery);
+        ArrayList<Room> resultQuery = this.roomDao.selectByQuery(query);
+        return resultQuery;
     }
 }

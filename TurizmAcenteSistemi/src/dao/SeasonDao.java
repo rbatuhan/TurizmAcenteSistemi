@@ -85,4 +85,8 @@ public class SeasonDao {
         }
         return obj;
     }
+    // Bir otelin sezonlarını getiren metot.
+    public ArrayList<Season> findHotelSeason(int hotelID){
+        return this.selectByQuery("SELECT * FROM public.season WHERE hotel_id = " + hotelID);
+    }
 }
