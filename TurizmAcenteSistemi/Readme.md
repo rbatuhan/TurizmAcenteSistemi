@@ -77,6 +77,3 @@ Proje İsterleri;
 // Employeeview => 258. Satır
 24. Kullanıcıya başarılı işlemleri sonrası pop up mesajları çıkmaktadır.
 25. Kullanıcıya hatalı işlemleri sonrası pop up mesajları çıkmaktadır.
-
-Video
-https://www.youtube.com/watch?v=t_LXdaU_xKg
